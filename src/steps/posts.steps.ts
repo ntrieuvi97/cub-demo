@@ -13,7 +13,7 @@ let postDetailPage: PostDetailPage;
 let postTitle: string;
 let postUrl: string;
 
-Given('I navigate to the Belivi Wordpress homepage', async function () {
+Given('I navigate to the homepage', async function () {
   browser = await chromium.launch({ headless: isHeadless });
   page = await browser.newPage();
   homePage = new HomePage(page);
