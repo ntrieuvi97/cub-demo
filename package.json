@@ -4,7 +4,8 @@
   "description": "Cucumber + Playwright (TypeScript) automation tests",
   "main": "src/index.ts",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require src/steps/**/*.ts tests/**/*.feature"
+    "test": "cucumber-js --require-module ts-node/register --require src/steps/**/*.ts tests/**/*.feature",
+    "testnnn": "cucumber-js --require-module ts-node/register --require src/steps/**/*.ts tests/**/*.feature --parallel 4"
   },
   "author": "",
   "license": "MIT",
