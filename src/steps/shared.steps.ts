@@ -1,5 +1,5 @@
-import { defineStep } from '@cucumber/cucumber';
-import { timeouts } from '../configs';
+import {After, defineStep} from '@cucumber/cucumber';
+import {timeouts} from '../configs';
 
 const scrollStep = 'I scroll to the bottom of the page';
 
@@ -24,4 +24,11 @@ async function scrollToBottom(context: any) {
 
 defineStep(scrollStep, { timeout: timeouts.pageInteraction }, async function () {
     await scrollToBottom(this);
+});
+
+
+After(async function () {
+    if (this.browser) {
+        await this.browser.close();
+    }
 });
