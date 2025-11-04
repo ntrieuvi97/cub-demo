@@ -1,21 +1,21 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"cucumber.features": [
-			"tests/**/*.feature"
-		],
-		"cucumberautocomplete.steps": [
-			"src/steps/**/*.ts"
-		],
-		"cucumberautocomplete.syncfeatures": "tests/**/*.feature",
-		"cucumber.glue": [
-			"tests/**/*.feature",
-			"src/steps/**/*.ts"
-		],
-		"cucumberautocomplete.strictGherkinValidation": true
-	}
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "cucumber.features": [
+            "tests/**/*.feature"
+        ],
+        "cucumberautocomplete.steps": [
+            "src/steps/**/*.ts"
+        ],
+        "cucumberautocomplete.syncfeatures": "tests/**/*.feature",
+        "cucumber.glue": [
+            "tests/**/*.feature",
+            "src/steps/**/*.ts"
+        ],
+        "cucumberautocomplete.strictGherkinValidation": false
+    }
 }

@@ -4,15 +4,20 @@
   "description": "Cucumber + Playwright (TypeScript) automation tests",
   "main": "src/index.ts",
   "scripts": {
-    "test": "cucumber-js --require-module ts-node/register --require src/steps/**/*.ts tests/**/*.feature",
-    "testnnn": "cucumber-js --require-module ts-node/register --require src/steps/**/*.ts tests/**/*.feature --parallel 4"
+    "test": "cucumber-js"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@cucumber/cucumber": "^10.0.0",
-    "@playwright/test": "^1.44.0",
-    "ts-node": "^10.9.1",
+    "@cucumber/html-formatter": "^22.0.0",
+    "@playwright/test": "^1.56.1",
+    "@types/axios": "^0.9.36",
+    "@types/cucumber-html-reporter": "^5.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "axios": "^1.12.2"
   }
 }

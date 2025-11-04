@@ -28,4 +28,9 @@ export class BasePage {
   async waitForDomContentLoaded() {
     await this.page.waitForLoadState('domcontentloaded');
   }
+
+  async getCurrentPage(): Promise<Page> {
+    return this.page;
+  }
+
 }
