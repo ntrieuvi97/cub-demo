@@ -29,7 +29,7 @@ async function goToPage(page: Page, pageName: string) {
     console.log(`Navigating to ${pageName} at URL: ${pageUrl}`);
     console.log(`page instance: ${page}`);
     await page.goto(pageUrl);
-    await page.waitForLoadState('load');
+    await page.waitForLoadState('domcontentloaded');
 }
 
 async function scrollToBottom(context: any) {
@@ -51,7 +51,7 @@ async function scrollToBottom(context: any) {
     });
 }
 
-defineStep(scrollStep, { timeout: timeouts.pageInteraction }, async function () {
+defineStep(scrollStep, { timeout: timeouts.pageInteraction }, async function (this: CustomWorld) {
     await scrollToBottom(this);
 });
 

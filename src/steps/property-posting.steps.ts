@@ -1,8 +1,7 @@
-﻿import { Given, When, Then, DataTable } from '@cucumber/cucumber';
+﻿import {DataTable, Then, When} from '@cucumber/cucumber';
 import assert from 'assert';
-import { timeouts } from '../configs';
-import { CustomWorld } from '../support/world';
-import { WebUrls } from '../apis/urls';
+import {CustomWorld} from '../support/world';
+import {WebUrls} from '../apis/urls';
 
 let listingIdGlobal: string;
 
@@ -78,8 +77,22 @@ When('I create a property listing with the following details:', async function (
     console.log('✅ Completing listing submission');
     await propertyPostingPage.clickOnButtonByText('Tiếp tục');
     await this.page!.waitForTimeout(10000);
+
+    if (data['Vip Type']) {
+        await propertyPostingPage.selectVipTypeOption(data['Vip Type']);
+        console.log(`🌟 Selected VIP type: ${data['Vip Type']}`);
+    }
+
+    if (data['Duration']) {
+        await propertyPostingPage.selectDurationOption(data['Duration']);
+        console.log(`⏳ Selected duration: ${data['Duration']}`);
+    }
+
     await propertyPostingPage.clickOnButtonByText('Tiếp tục');
-    await propertyPostingPage.clickOnButtonByText('Không, tiếp tục');
+    let byPassButtonExists = await propertyPostingPage.isButtonWithTextVisible('Không, tiếp tục');
+    if (byPassButtonExists) {
+        await propertyPostingPage.clickOnButtonByText('Không, tiếp tục');
+    }
     await propertyPostingPage.clickOnButtonByText('Thanh toán');
 });
 

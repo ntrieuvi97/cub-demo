@@ -1,12 +1,38 @@
-import { Before, After, Status } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
-import { CustomWorld } from './world';
-import { UMSApi } from '../apis/endpoints/ums.api';
-import { DataLoader } from '../utils/data-loader';
-import { UsersData } from '../types/user.interface';
+import {After, Before, Status} from '@cucumber/cucumber';
+import {chromium} from '@playwright/test';
+import {CustomWorld} from './world';
+import {UMSApi} from '../apis/endpoints/ums.api';
+import {DataLoader} from '../utils/data-loader';
+import {UsersData} from '../types';
 import playwrightConfig from '../../playwright.config';
+import * as fs from 'fs';
+import * as path from 'path';
 
 console.log('✅ hooks.ts file loaded');
+
+// Utility to scan tests/data for all credential files
+function getAllCredentialFiles(): string[] {
+    const dir = path.resolve('tests/data');
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir)
+        .filter(f => f.startsWith('credentials.') && f.endsWith('.json'))
+        .map(f => path.join('tests/data', f));
+}
+
+// Utility to load and merge all credentials from all files
+function loadAllCredentials(): UsersData {
+    const files = getAllCredentialFiles();
+    let merged: UsersData = {};
+    for (const file of files) {
+        try {
+            const data = DataLoader.loadJson<UsersData>(file);
+            merged = {...merged, ...data};
+        } catch (e) {
+            console.warn(`⚠️ Failed to load credentials from ${file}:`, e);
+        }
+    }
+    return merged;
+}
 
 // Hook for scenarios tagged with @web-ui - initialize browser
 Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
@@ -47,10 +73,8 @@ Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
 
 // Hook for scenarios tagged with @authorized
 Before({ tags: '@authorized' }, async function (this: CustomWorld, scenario) {
-    // Default user
     let userType = '';
     console.log('🔐 @authorized hook triggered');
-    // Look for @user(userType) tag
     const userTag = scenario.pickle.tags.find(tag => tag.name.startsWith('@user='));
     if (userTag) {
         const match = userTag.name.match(/@user=(.+)/);
@@ -58,15 +82,14 @@ Before({ tags: '@authorized' }, async function (this: CustomWorld, scenario) {
     }
     if (!userType) {
         console.warn('⚠️ No user type specified in @user tag');
-        return
-    } // No user type specified, skip login
+        return;
+    }
 
-
-    // Get credentials from data file
-    const allCredentials = DataLoader.loadJson<UsersData>('tests/data/credentials.json');
+    // Load and merge all credentials
+    const allCredentials = loadAllCredentials();
     const credentials = allCredentials[userType];
     if (!credentials) {
-        throw new Error(`User type "${userType}" not found in credentials.json`);
+        throw new Error(`User "${userType}" not found in any credentials file in tests/data`);
     }
 
     const ums = new UMSApi(this.page!);
@@ -75,7 +98,6 @@ Before({ tags: '@authorized' }, async function (this: CustomWorld, scenario) {
     if (!res.ok()) {
         throw new Error(`Failed to authenticate. Status: ${res.status()}`);
     }
-
 });
 
 // Cleanup hook
@@ -121,4 +143,3 @@ After(async function (this: CustomWorld, { result, pickle }) {
         console.log('✅ Browser closed');
     }
 });
-

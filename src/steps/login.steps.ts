@@ -15,15 +15,14 @@ let contactData: any;
 
 
 Given('I launch the login page', { timeout: timeouts.navigation }, async function (this: CustomWorld) {
-    await this.initBrowser();
     await this.page?.goto(`https://staging.propertyguru.vn/sellernet/trang-dang-nhap`);
-    loginPage = new LoginPage(this.page!);
+    loginPage = this.pages.loginPage()
 });
 
 
 
 When('I input {string} credentials and submit', { timeout: timeouts.pageInteraction }, async function (this: CustomWorld, userType: string) {
-    const allCredentials = DataLoader.loadJson<UsersData>('tests/data/credentials.json');
+    const allCredentials = DataLoader.loadJson<UsersData>('tests/data/credentials.login.json');
     const credentials = allCredentials[userType];
 
     if (!credentials) {
@@ -32,7 +31,13 @@ When('I input {string} credentials and submit', { timeout: timeouts.pageInteract
 
     await loginPage.inputUsername(credentials.username);
     await loginPage.inputPassword(credentials.password);
-    await loginPage.clickLoginButton();
+    await loginPage.clickLoginButton()
+    await loginPage.clickIgnoreButtonIfPresent()
+});
+
+When('I select to login as {string}', { }, async function (this: CustomWorld, userType: string) {
+    await loginPage.selectLoginType(userType);
+    await loginPage.clickIgnoreButtonIfPresent()
 });
 
 Then('I will see the dashboard page after login', { timeout: timeouts.verification }, async function (this: CustomWorld) {

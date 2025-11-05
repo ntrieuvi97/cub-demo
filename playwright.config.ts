@@ -1,8 +1,6 @@
-import { defineConfig } from '@playwright/test';
+import {defineConfig} from '@playwright/test';
 
 export default defineConfig({
-    // Limit the number of workers on CI, use default locally
-    workers: process.env.CI ? 2 : undefined,
     timeout: 30000,
     use: {
         headless: false,

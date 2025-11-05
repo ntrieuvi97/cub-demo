@@ -9,7 +9,7 @@ export class DataLoader {
     }
 
     static getCredentials(): { [userType: string]: { username: string; password: string } } {
-        const data = this.loadJson<{ [key: string]: { username: string; password: string } }>('tests/data/credentials.json');
+        const data = this.loadJson<{ [key: string]: { username: string; password: string } }>('tests/data/credentials.login.json');
         return data;
     }
 

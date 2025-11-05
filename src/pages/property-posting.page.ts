@@ -1,5 +1,5 @@
-﻿import { BasePage } from './base.page';
-import { Page } from '@playwright/test';
+﻿import {BasePage} from './base.page';
+import {Page} from '@playwright/test';
 
 export class PropertyPostingPage extends BasePage {
     intentButton: string = 'div[data-tracking-id="click-choose-need"][data-tracking-label="type=${listingType}"]';
@@ -14,7 +14,8 @@ export class PropertyPostingPage extends BasePage {
     priceInput: string = '#lcp-price-input';
     titleInput: string = '#lcp-title-input textarea';
     descriptionInput: string = '#lcp-description-input textarea';
-
+    vipTypeOption: string = '//div[@data-tracking-id="click-choose-VIP"][not(contains(@class, "selected"))]//p[@class="pg-font-label-m"]';
+    durationOption: string = '//div[@data-tracking-id="click-choose-duration"][not(contains(@class, "selected"))]//p[1]';
     constructor(page: Page) {
         super(page);
     }
@@ -106,6 +107,31 @@ export class PropertyPostingPage extends BasePage {
         await this.page.waitForTimeout(3000);
     }
 
+    async selectVipTypeOption(vipType: string) {
+        const vipOption = this.page.locator(this.vipTypeOption).filter({hasText: vipType}).first();
+        try {
+            await vipOption.waitFor({state: 'visible', timeout: 10000});
+            await vipOption.click();
+            await this.page.waitForTimeout(1000);
+        } catch {
+            // If VIP option is not found, it might be because no VIP options are available.
+            console.log(`⚠️  VIP type option "${vipType}" are selected or not available.`);
+        }
+    }
+
+    async selectDurationOption(duration: string) {
+        const durationOption = this.page.locator(this.durationOption).filter({hasText: duration}).first();
+        try {
+            await durationOption.waitFor({state: 'visible', timeout: 10000});
+            await durationOption.click();
+            await this.page.waitForTimeout(1000);
+        } catch {
+            // If duration option is not found, it might be because no duration options are available.
+            console.log(`⚠️  Duration option "${duration}" are selected or not available.`);
+        }
+
+    }
+
     async clickOnButtonByText(buttonText: string, options?: { timeout?: number }) {
         try {
             const button = this.page.getByRole('button', { name: buttonText }).first();
@@ -134,6 +160,16 @@ export class PropertyPostingPage extends BasePage {
                 return; // Don't throw
             }
             throw error;
+        }
+    }
+
+    async isButtonWithTextVisible(buttonText: string): Promise<boolean> {
+        const button = this.page.getByRole('button', {name: buttonText}).first();
+        try {
+            await button.waitFor({state: 'visible', timeout: 5000});
+            return true;
+        } catch {
+            return false;
         }
     }
 

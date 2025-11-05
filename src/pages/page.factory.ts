@@ -3,6 +3,7 @@ import { HomePage } from './home.page';
 import { PropertyPostingPage } from './property-posting.page';
 import { PostDetailPage } from './post-detail.page';
 import { ListingManagementPage } from './listing-management.page';
+import {LoginPage} from "./login_pages/login.page";
 
 /**
  * Page Object Factory - centralized management of page objects
@@ -57,6 +58,13 @@ export class PageFactory {
         return this.pageCache.get('listingManagement');
     }
 
+    loginPage(): LoginPage{
+        if (!this.pageCache.has('loginPage')) {
+            this.pageCache.set('loginPage', new LoginPage(this.page));
+        }
+        return this.pageCache.get('loginPage');
+    }
+
     /**
      * Clear all cached page objects (useful when page context changes)
      */
@@ -71,4 +79,5 @@ export class PageFactory {
         this.page = newPage;
         this.clearCache();
     }
+
 }

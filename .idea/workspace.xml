@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eec0a58-7de7-4456-b4dd-e5b34a614a19" name="Changes" comment="feat: Add project configuration files and enhance step definitions with cleanup logic">
-      <change afterPath="$PROJECT_DIR$/src/pages/create_pages/step_1_page.page.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configs.ts" afterDir="false" />
+    <list default="true" id="9eec0a58-7de7-4456-b4dd-e5b34a614a19" name="Changes" comment="feat: Add credential files for login and listing tests, and enhance data loading logic">
+      <change afterPath="$PROJECT_DIR$/tests/data/credentials.listing.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/data/credentials.login.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/playwright.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/playwright.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login_pages/login.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login_pages/login.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/page.factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/page.factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/property-posting.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/property-posting.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/login.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/login.steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/property-posting.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/property-posting.steps.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/steps/shared.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/shared.steps.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/support/world.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/support/world.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/posts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/posts.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/support/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/support/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/data-loader.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/data-loader.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/data/credentials.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/login.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/posts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/posts.belivi.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/property-posting.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/property-posting.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +42,9 @@
     &quot;accountId&quot;: &quot;7c8634ab-e81f-4ae7-9616-34a40f7897d8&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -43,39 +54,75 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cucumber.js.Scenario: Unsuccessful login with inv....executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.Scenario: Verify posts are displayed ... (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.Scenario: Verify posts are displayed ....executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.Scenario: Verify user can create a ne... (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.Scenario: Verify user can create a ne... (2).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.Scenario: Verify user can create a ne....executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.posts.feature (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.posts.feature (2).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.posts.feature (3).executor&quot;: &quot;Run&quot;,
-    &quot;Cucumber.js.posts.feature.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/cub-demo&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.cucumber.cucumber_node_package_dir&quot;: &quot;D:/cub-demo/node_modules/@cucumber/cucumber&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\cub-demo\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cucumber.js.Scenario: Create a new land property ... (1).executor": "Run",
+    "Cucumber.js.Scenario: Create a new land property ....executor": "Run",
+    "Cucumber.js.Scenario: Create a new office propert... (1).executor": "Run",
+    "Cucumber.js.Scenario: Create a new office propert... (2).executor": "Run",
+    "Cucumber.js.Scenario: Create a new office propert....executor": "Run",
+    "Cucumber.js.Scenario: Create a new property listi... (1).executor": "Run",
+    "Cucumber.js.Scenario: Create a new property listi....executor": "Run",
+    "Cucumber.js.Scenario: Create a new property listing (1).executor": "Run",
+    "Cucumber.js.Scenario: Create a new property listing (2).executor": "Run",
+    "Cucumber.js.Scenario: Create a new rental propert....executor": "Run",
+    "Cucumber.js.Scenario: Create a new villa property... (1).executor": "Run",
+    "Cucumber.js.Scenario: Create a new villa property... (2).executor": "Run",
+    "Cucumber.js.Scenario: Create a new villa property... (3).executor": "Run",
+    "Cucumber.js.Scenario: Create a new villa property....executor": "Run",
+    "Cucumber.js.Scenario: Fail to create property lis....executor": "Run",
+    "Cucumber.js.Scenario: Login with blocked account (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with blocked account.executor": "Run",
+    "Cucumber.js.Scenario: Login with blocked enterpri... (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with blocked enterpri... (2).executor": "Run",
+    "Cucumber.js.Scenario: Login with blocked enterpri....executor": "Run",
+    "Cucumber.js.Scenario: Login with deleted account (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with deleted account.executor": "Run",
+    "Cucumber.js.Scenario: Login with email account (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with email account.executor": "Run",
+    "Cucumber.js.Scenario: Login with enterprise account (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with enterprise account (2).executor": "Run",
+    "Cucumber.js.Scenario: Login with enterprise account.executor": "Run",
+    "Cucumber.js.Scenario: Login with locked account (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with locked account.executor": "Run",
+    "Cucumber.js.Scenario: Login with multiple role em....executor": "Run",
+    "Cucumber.js.Scenario: Login with multiple role pe... (1).executor": "Run",
+    "Cucumber.js.Scenario: Login with multiple role pe... (2).executor": "Run",
+    "Cucumber.js.Scenario: Login with multiple role pe....executor": "Run",
+    "Cucumber.js.Scenario: Login with multiple roles b....executor": "Run",
+    "Cucumber.js.Scenario: Login with username account.executor": "Run",
+    "Cucumber.js.Scenario: Unsuccessful login with inv....executor": "Run",
+    "Cucumber.js.Scenario: Verify posts are displayed ... (1).executor": "Run",
+    "Cucumber.js.Scenario: Verify posts are displayed ....executor": "Run",
+    "Cucumber.js.Scenario: Verify user can create a ne... (1).executor": "Run",
+    "Cucumber.js.Scenario: Verify user can create a ne... (2).executor": "Run",
+    "Cucumber.js.Scenario: Verify user can create a ne....executor": "Run",
+    "Cucumber.js.posts.feature (1).executor": "Run",
+    "Cucumber.js.posts.feature (2).executor": "Run",
+    "Cucumber.js.posts.feature (3).executor": "Run",
+    "Cucumber.js.posts.feature.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/cub-demo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.cucumber.cucumber_node_package_dir": "D:/cub-demo/node_modules/@cucumber/cucumber",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "ts.external.directory.path": "D:\\cub-demo\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Cucumber.js.Scenario: Unsuccessful login with inv...">
-    <configuration name="Scenario: Unsuccessful login with inv..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
-      <option name="myFilePath" value="$PROJECT_DIR$/tests/login.feature" />
-      <option name="myNameFilter" value="^Unsuccessful login with invalid credentials$" />
+}]]></component>
+  <component name="RunManager" selected="Cucumber.js.Scenario: Create a new property listi... (1)">
+    <configuration name="Scenario: Create a new property listi... (1)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new property listing by not sufficient balance$" />
       <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
       <envs>
@@ -85,9 +132,9 @@
         <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
       </method>
     </configuration>
-    <configuration name="Scenario: Verify user can create a ne... (1)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
-      <option name="myFilePath" value="$PROJECT_DIR$/tests/create.feature" />
-      <option name="myNameFilter" value="^Verify user can create a new listing$" />
+    <configuration name="Scenario: Create a new property listi..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new property listing by not sufficient balance$" />
       <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
       <envs>
@@ -97,9 +144,9 @@
         <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
       </method>
     </configuration>
-    <configuration name="Scenario: Verify user can create a ne... (2)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
-      <option name="myFilePath" value="$PROJECT_DIR$/tests/create.feature" />
-      <option name="myNameFilter" value="^Verify user can create a new listing$" />
+    <configuration name="Scenario: Create a new property listing (1)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new property listing$" />
       <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
       <envs>
@@ -109,9 +156,30 @@
         <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
       </method>
     </configuration>
-    <configuration name="Scenario: Verify user can create a ne..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
-      <option name="myFilePath" value="$PROJECT_DIR$/tests/create.feature" />
-      <option name="myNameFilter" value="^Verify user can create a new listing$" />
+    <configuration name="Scenario: Create a new property listing" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new property listing$" />
+      <option name="cucumberJsArguments" value="" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Create a new rental propert..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new rental property listing$" />
+      <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <envs>
+        <env name="HEADLESS" value="false" />
+      </envs>
+      <method v="2">
+        <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Create a new villa property... (3)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
+      <option name="myNameFilter" value="^Create a new villa property listing$" />
       <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
       <envs>
@@ -135,17 +203,21 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Cucumber.js.Scenario: Unsuccessful login with inv..." />
-        <item itemvalue="Cucumber.js.Scenario: Verify user can create a ne... (2)" />
-        <item itemvalue="Cucumber.js.Scenario: Verify user can create a ne... (1)" />
-        <item itemvalue="Cucumber.js.Scenario: Verify user can create a ne..." />
+        <item itemvalue="Cucumber.js.Scenario: Create a new property listi... (1)" />
+        <item itemvalue="Cucumber.js.Scenario: Create a new property listi..." />
+        <item itemvalue="Cucumber.js.Scenario: Create a new rental propert..." />
+        <item itemvalue="Cucumber.js.Scenario: Create a new property listing (1)" />
+        <item itemvalue="Cucumber.js.Scenario: Create a new villa property... (3)" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SeleniumInternalSettingsState">
+    <option name="lastUrl" value="https://staging.propertyguru.vn/nguoi-ban/trang-chu" />
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-WS-252.25557.126" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-WS-252.27397.92" />
       </set>
     </attachedChunks>
   </component>
@@ -167,6 +239,9 @@
       <workItem from="1756111598431" duration="7000" />
       <workItem from="1757041087984" duration="190000" />
       <workItem from="1761290107050" duration="4918000" />
+      <workItem from="1762247295562" duration="741000" />
+      <workItem from="1762248138701" duration="121000" />
+      <workItem from="1762309922817" duration="12857000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Add project configuration files and enhance step definitions with cleanup logic">
       <option name="closed" value="true" />
@@ -176,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754906649633</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add bds tests">
+      <option name="closed" value="true" />
+      <created>1762247362604</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762247362604</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,6 +267,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: Add project configuration files and enhance step definitions with cleanup logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add project configuration files and enhance step definitions with cleanup logic" />
+    <MESSAGE value="add bds tests" />
+    <MESSAGE value="feat: Add credential files for login and listing tests, and enhance data loading logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add credential files for login and listing tests, and enhance data loading logic" />
   </component>
 </project>
