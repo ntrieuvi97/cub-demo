@@ -1,7 +1,6 @@
 
 
 import { Given, When, Then } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
 import assert from 'assert';
 import { timeouts } from '../configs';
 import { LoginPage } from '../pages/login_pages/login.page';

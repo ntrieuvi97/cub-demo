@@ -1,6 +1,6 @@
-import { BasePage } from '../base.page';
-import { Page } from '@playwright/test';
-import {timeouts} from "../../configs";
+import {BasePage} from '../base.page';
+import {Page} from '@playwright/test';
+
 export class LoginPage extends BasePage {
     static USERNAME_INPUT_SELECTOR = '//input[@name="username"]';
     static PASSWORD_INPUT_SELECTOR = '//input[@name="password"]';

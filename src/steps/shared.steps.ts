@@ -1,8 +1,8 @@
-import { After, defineStep } from '@cucumber/cucumber';
-import { timeouts } from '../configs';
-import { WebUrls } from '../apis/urls';
-import { CustomWorld } from '../support/world';
-import { chromium, Page } from 'playwright-core';
+import {After, defineStep} from '@cucumber/cucumber';
+import {timeouts} from '../configs';
+import {WebUrls} from '../apis/urls';
+import {CustomWorld} from '../support/world';
+import {Page} from 'playwright-core';
 
 const scrollStep = 'I scroll to the bottom of the page';
 const navigationStep = 'I navigate to the {string}';
