@@ -71,33 +71,31 @@ Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
     console.log(`✅ Browser initialized - Page is ${this.page ? 'defined' : 'undefined'}`);
 });
 
-// Hook for scenarios tagged with @authorized
-Before({ tags: '@authorized' }, async function (this: CustomWorld, scenario) {
-    let userType = '';
-    console.log('🔐 @authorized hook triggered');
+// Hook for scenarios tagged with @user=xxx
+Before(function (this: CustomWorld, scenario) {
     const userTag = scenario.pickle.tags.find(tag => tag.name.startsWith('@user='));
-    if (userTag) {
-        const match = userTag.name.match(/@user=(.+)/);
-        if (match) userType = match[1];
-    }
+    if (!userTag) return;
+    const match = userTag.name.match(/@user=(.+)/);
+    if (!match) return;
+    const userType = match[1];
     if (!userType) {
         console.warn('⚠️ No user type specified in @user tag');
         return;
     }
-
     // Load and merge all credentials
     const allCredentials = loadAllCredentials();
     const credentials = allCredentials[userType];
     if (!credentials) {
         throw new Error(`User "${userType}" not found in any credentials file in tests/data`);
     }
-
-    const ums = new UMSApi(this.page!);
-    let res = await ums.login(credentials.username, credentials.password);
-
-    if (!res.ok()) {
-        throw new Error(`Failed to authenticate. Status: ${res.status()}`);
-    }
+    // Perform login
+    return (async () => {
+        const ums = new UMSApi(this.page!);
+        let res = await ums.login(credentials.username, credentials.password);
+        if (!res.ok()) {
+            throw new Error(`Failed to authenticate. Status: ${res.status()}`);
+        }
+    })();
 });
 
 // Cleanup hook

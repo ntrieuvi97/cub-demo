@@ -3,7 +3,7 @@ Feature: Property Posting
   I want to post a property for sale
   So that I can list my property on the platform
 
-  @lcp @web-ui @authorized @user=validUser
+  @lcp @web-ui @user=validUser
   Scenario: Create a new property listing
     Given I navigate to the "LCP"
     When I create a property listing with the following details:
@@ -22,7 +22,7 @@ Feature: Property Posting
     And I got the listing ID
     And I should find the listing in LMP
 
-  @lcp @web-ui @authorized @user=validUser
+  @lcp @web-ui @user=validUser
   Scenario: Create a new rental property listing
     Given I navigate to the "LCP"
     When I create a property listing with the following details:
@@ -41,7 +41,7 @@ Feature: Property Posting
     And I got the listing ID
     And I should find the listing in LMP
 
-  @lcp @web-ui @authorized @user=validUser
+  @lcp @web-ui @user=validUser
   Scenario: Create a new land property listing
     Given I navigate to the "LCP"
     When I create a property listing with the following details:
@@ -60,7 +60,7 @@ Feature: Property Posting
     And I got the listing ID
     And I should find the listing in LMP
 
-  @lcp @web-ui @authorized @user=validUser
+  @lcp @web-ui @user=validUser
   Scenario: Create a new office property listing
     Given I navigate to the "LCP"
     When I create a property listing with the following details:
@@ -79,7 +79,7 @@ Feature: Property Posting
     And I got the listing ID
     And I should find the listing in LMP
 
-  @lcp @web-ui @authorized @user=validUser
+  @lcp @web-ui @user=validUser
   Scenario: Create a new villa property listing
     Given I navigate to the "LCP"
     When I create a property listing with the following details:
@@ -99,7 +99,7 @@ Feature: Property Posting
     And I should find the listing in LMP
 
 
-  @lcp @web-ui @authorized @user=notSufficientMoney
+  @lcp @web-ui @user=notSufficientMoney
   Scenario: Create a new property listing by not sufficient balance
     Given I navigate to the "LCP"
     When I create a property listing with the following details:

@@ -140,15 +140,10 @@ export class PropertyPostingPage extends BasePage {
             await button.waitFor({ state: 'attached', timeout: options?.timeout || 10000 });
             await this.page.waitForLoadState('domcontentloaded').catch(() => {});
             
-            // Give page time to stabilize
-            await this.page.waitForTimeout(1000);
-            
             // Perform the click
             await button.click({ timeout: options?.timeout || 10000 });
-            
-            // Wait after click
-            await this.page.waitForTimeout(500);
-            
+
+
         } catch (error: any) {
             // Log the error but check if it's expected
             const errorMsg = error.message || String(error);
