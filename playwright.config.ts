@@ -4,7 +4,7 @@ export default defineConfig({
     timeout: 30000,
     use: {
         headless: false,
-        viewport: { width: 1280, height: 720 },
+        viewport: { width: 1960, height: 800 },
         actionTimeout: 10000,
         ignoreHTTPSErrors: true,
         video: 'off',
