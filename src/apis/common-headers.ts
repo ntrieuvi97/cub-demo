@@ -108,4 +108,17 @@ export const HeaderPresets = {
             'Content-Type': 'application/json',
         }
     ),
+
+    /**
+     * Headers for AME API (Listing Orchestrator)
+     */
+    ame: (): Record<string, string> => mergeHeaders(
+        CommonHeaders.propertyGuru,
+        CommonHeaders.cors,
+        {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Pragma': 'no-cache',
+            'x-requestid': generateRequestId(),
+        }
+    ),
 };

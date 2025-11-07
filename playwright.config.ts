@@ -4,7 +4,7 @@ export default defineConfig({
     timeout: 30000,
     use: {
         headless: false,
-        viewport: { width: 1960, height: 800 },
+        viewport: null, // null allows browser to use maximized window size
         actionTimeout: 10000,
         ignoreHTTPSErrors: true,
         video: 'off',

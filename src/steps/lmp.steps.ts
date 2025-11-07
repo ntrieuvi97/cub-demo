@@ -104,16 +104,20 @@ Given('I have a listing that {string} a {string} with {string} type', async func
     const responseData = await response.json();
 
     // Extract listing ID from response
-    createdListingId = responseData.Result?.SavedProduct?.ProductId || undefined;
+    const listingId = responseData.Result?.SavedProduct?.ProductId || undefined;
 
-    if (!createdListingId) {
+    if (!listingId) {
         console.error('❌ Failed to create listing. Response:', JSON.stringify(responseData, null, 2));
         throw new Error(`Listing creation failed: ${responseData.Error?.Message || 'Unknown error'}`);
     }
 
-    console.log(`✅ Listing created successfully! ID: ${createdListingId}`);
+    // Store in both module variable (for backward compatibility) and context
+    createdListingId = listingId;
+    this.createdListingId = listingId;
+
+    console.log(`✅ Listing created successfully! ID: ${listingId}`);
     console.log('📋 Listing details:', {
-        id: createdListingId,
+        id: listingId,
         title: listingData.title,
         location: `${randomCity.name} > ${randomDistrict.name} > ${randomWard.name}`,
         price: listingData.price,

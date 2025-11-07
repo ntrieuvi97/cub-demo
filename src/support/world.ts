@@ -1,5 +1,5 @@
 import { Browser, Page, BrowserContext, chromium } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
+import { HomePage } from '../pages/belivi/home.page';
 import { IWorldOptions, setWorldConstructor } from '@cucumber/cucumber';
 import { PageFactory } from '../pages/page.factory';
 
@@ -8,6 +8,8 @@ export class CustomWorld {
   page?: Page;
   context?: BrowserContext;
   private _pageFactory?: PageFactory;
+  createdListingId?: number;  // Store created listing ID
+  userId?: number;            // Store user ID
 
   constructor(options: IWorldOptions) {
     // Optionally initialize values here

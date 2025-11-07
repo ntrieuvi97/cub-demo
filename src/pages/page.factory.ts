@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
-import { HomePage } from './home.page';
-import { PropertyPostingPage } from './property-posting.page';
-import { PostDetailPage } from './post-detail.page';
+import { HomePage } from './belivi/home.page';
+import { ListingCreationPage } from './listing-creation.page';
+import { PostDetailPage } from './belivi/post-detail.page';
 import { ListingManagementPage } from './listing-management.page';
-import {LoginPage} from "./login_pages/login.page";
+import {LoginPage} from "./login.page";
 
 /**
  * Page Object Factory - centralized management of page objects
@@ -29,11 +29,11 @@ export class PageFactory {
     }
 
     /**
-     * Get or create PropertyPostingPage instance
+     * Get or create ListingCreationPage instance
      */
-    propertyPosting(): PropertyPostingPage {
+    propertyPosting(): ListingCreationPage {
         if (!this.pageCache.has('propertyPosting')) {
-            this.pageCache.set('propertyPosting', new PropertyPostingPage(this.page));
+            this.pageCache.set('propertyPosting', new ListingCreationPage(this.page));
         }
         return this.pageCache.get('propertyPosting');
     }

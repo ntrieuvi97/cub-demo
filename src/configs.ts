@@ -5,5 +5,6 @@ export const timeouts = {
   navigation: 30000,       // 30 seconds for page navigation
   pageInteraction: 15000,  // 15 seconds for clicking, scrolling, etc.
   verification: 30000,     // 30 seconds for assertions and verifications
-  elementLoad: 15000       // 15 seconds for element loading/finding
+  elementLoad: 15000,      // 15 seconds for element loading/finding
+  api: 30000               // 30 seconds for API calls
 };

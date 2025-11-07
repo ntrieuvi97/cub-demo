@@ -40,14 +40,17 @@ Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
 
     if (!this.browser) {
         const headless = playwrightConfig.use?.headless ?? false;
-        this.browser = await chromium.launch({ headless });
+        this.browser = await chromium.launch({
+            headless,
+            args: ['--start-maximized']
+        });
         console.log('✅ Browser instance created');
     }
 
     if (!this.context) {
         // Use Playwright config settings for context
         this.context = await this.browser.newContext({
-            viewport: playwrightConfig.use?.viewport,
+            viewport: null, // null viewport allows browser to use full screen
             ignoreHTTPSErrors: playwrightConfig.use?.ignoreHTTPSErrors,
             // Enable screenshots and video based on config
             recordVideo: playwrightConfig.use?.video ? {
@@ -88,12 +91,22 @@ Before(function (this: CustomWorld, scenario) {
     if (!credentials) {
         throw new Error(`User "${userType}" not found in any credentials file in tests/data`);
     }
-    // Perform login
+    // Perform login and extract userId from response
     return (async () => {
         const ums = new UMSApi(this.page!);
         let res = await ums.login(credentials.username, credentials.password);
         if (!res.ok()) {
             throw new Error(`Failed to authenticate. Status: ${res.status()}`);
+        }
+
+        // Extract userId directly from login response
+        const loginData = await res.json();
+        this.userId = loginData.data?.userId || loginData.userId;
+
+        if (this.userId) {
+            console.log(`✅ User logged in successfully | UserId: ${this.userId} | User: ${userType}`);
+        } else {
+            console.warn('⚠️ Login successful but userId not found in response');
         }
     })();
 });

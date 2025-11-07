@@ -1,8 +1,8 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { chromium } from '@playwright/test';
 import assert from 'assert';
-import { baseUrl, timeouts } from '../configs';
-import { CustomWorld } from '../support/world';
+import { baseUrl, timeouts } from '../../configs';
+import { CustomWorld } from '../../support/world';
 
 let postTitle: string;
 let postUrl: string;

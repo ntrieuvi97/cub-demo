@@ -1,7 +1,7 @@
 ﻿import {BasePage} from './base.page';
 import {Page} from '@playwright/test';
 
-export class PropertyPostingPage extends BasePage {
+export class ListingCreationPage extends BasePage {
     intentButton: string = 'div[data-tracking-id="click-choose-need"][data-tracking-label="type=${listingType}"]';
     searchAddressBox: string = "div[class ^='style_location-search-container']";
     addressConfirmButton: string = 'button[data-tracking-id="click-confirm-location"]';

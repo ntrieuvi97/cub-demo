@@ -1,4 +1,4 @@
-import { BasePage } from './base.page';
+import { BasePage } from '../base.page';
 
 export class PostDetailPage extends BasePage {
   static TITLE_SELECTOR = 'h1, h2, .entry-title, .wp-block-post-title';

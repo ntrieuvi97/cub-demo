@@ -5,9 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9eec0a58-7de7-4456-b4dd-e5b34a614a19" name="Changes" comment="refactor: Rename property-posting.feature to create.feature and update user tags in scenarios">
-      <change afterPath="$PROJECT_DIR$/src/fixtures.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/apis/endpoints/ame.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/step-helpers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/playwright.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/playwright.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/COMMON_HEADERS.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/common-headers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/common-headers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/endpoints/COMMON_API_USAGE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/models/BFF_LISTING_USAGE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/models/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/urls.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/urls.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configs.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/belivi/home.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/login_pages/login.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/page.factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/page.factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/post-detail.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/belivi/post-detail.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/property-posting.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/listing-creation.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/lmp.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/lmp.steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/login.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/login.steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/posts.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/belivi/posts.steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/steps/shared.steps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/steps/shared.steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/support/hooks.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/support/hooks.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/support/world.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/support/world.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/lmp.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/lmp.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/posts.belivi.feature" beforeDir="false" afterPath="$PROJECT_DIR$/tests/examples/posts.belivi.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,73 +69,81 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Cucumber.js.Scenario: Create a new land property ... (1).executor": "Run",
-    "Cucumber.js.Scenario: Create a new land property ....executor": "Run",
-    "Cucumber.js.Scenario: Create a new office propert... (1).executor": "Run",
-    "Cucumber.js.Scenario: Create a new office propert... (2).executor": "Run",
-    "Cucumber.js.Scenario: Create a new office propert....executor": "Run",
-    "Cucumber.js.Scenario: Create a new property listi... (1).executor": "Run",
-    "Cucumber.js.Scenario: Create a new property listi....executor": "Run",
-    "Cucumber.js.Scenario: Create a new property listing (1).executor": "Run",
-    "Cucumber.js.Scenario: Create a new property listing (2).executor": "Run",
-    "Cucumber.js.Scenario: Create a new rental propert....executor": "Run",
-    "Cucumber.js.Scenario: Create a new villa property... (1).executor": "Run",
-    "Cucumber.js.Scenario: Create a new villa property... (2).executor": "Run",
-    "Cucumber.js.Scenario: Create a new villa property... (3).executor": "Run",
-    "Cucumber.js.Scenario: Create a new villa property....executor": "Run",
-    "Cucumber.js.Scenario: Fail to create property lis....executor": "Run",
-    "Cucumber.js.Scenario: Login with blocked account (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with blocked account.executor": "Run",
-    "Cucumber.js.Scenario: Login with blocked enterpri... (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with blocked enterpri... (2).executor": "Run",
-    "Cucumber.js.Scenario: Login with blocked enterpri....executor": "Run",
-    "Cucumber.js.Scenario: Login with deleted account (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with deleted account.executor": "Run",
-    "Cucumber.js.Scenario: Login with email account (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with email account.executor": "Run",
-    "Cucumber.js.Scenario: Login with enterprise account (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with enterprise account (2).executor": "Run",
-    "Cucumber.js.Scenario: Login with enterprise account.executor": "Run",
-    "Cucumber.js.Scenario: Login with locked account (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with locked account.executor": "Run",
-    "Cucumber.js.Scenario: Login with multiple role em....executor": "Run",
-    "Cucumber.js.Scenario: Login with multiple role pe... (1).executor": "Run",
-    "Cucumber.js.Scenario: Login with multiple role pe... (2).executor": "Run",
-    "Cucumber.js.Scenario: Login with multiple role pe....executor": "Run",
-    "Cucumber.js.Scenario: Login with multiple roles b....executor": "Run",
-    "Cucumber.js.Scenario: Login with username account.executor": "Run",
-    "Cucumber.js.Scenario: Successful login with valid....executor": "Run",
-    "Cucumber.js.Scenario: Unsuccessful login with inv....executor": "Run",
-    "Cucumber.js.Scenario: Verify posts are displayed ... (1).executor": "Run",
-    "Cucumber.js.Scenario: Verify posts are displayed ....executor": "Run",
-    "Cucumber.js.Scenario: Verify user can create a ne... (1).executor": "Run",
-    "Cucumber.js.Scenario: Verify user can create a ne... (2).executor": "Run",
-    "Cucumber.js.Scenario: Verify user can create a ne....executor": "Run",
-    "Cucumber.js.posts.feature (1).executor": "Run",
-    "Cucumber.js.posts.feature (2).executor": "Run",
-    "Cucumber.js.posts.feature (3).executor": "Run",
-    "Cucumber.js.posts.feature.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/cub-demo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs.cucumber.cucumber_node_package_dir": "D:/cub-demo/node_modules/@cucumber/cucumber",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.sync",
-    "ts.external.directory.path": "D:\\cub-demo\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Cucumber.js.Scenario: Create a new land property ... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new land property ....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new office propert... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new office propert... (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new office propert....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new property listi... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new property listi....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new property listing (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new property listing (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new rental propert....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new villa property... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new villa property... (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new villa property... (3).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Create a new villa property....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Fail to create property lis....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with blocked account (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with blocked account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with blocked enterpri... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with blocked enterpri... (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with blocked enterpri....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with deleted account (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with deleted account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with email account (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with email account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with enterprise account (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with enterprise account (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with enterprise account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with locked account (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with locked account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with multiple role em....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with multiple role pe... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with multiple role pe... (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with multiple role pe....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with multiple roles b....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Login with username account.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Successful login with valid....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Unsuccessful login with inv....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Verify posts are displayed ... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Verify posts are displayed ....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Verify user can create a ne... (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Verify user can create a ne... (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.Scenario: Verify user can create a ne....executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.posts.feature (1).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.posts.feature (2).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.posts.feature (3).executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber.js.posts.feature.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/cub-demo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs.cucumber.cucumber_node_package_dir&quot;: &quot;D:/cub-demo/node_modules/@cucumber/cucumber&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\cub-demo\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Cucumber.js.Scenario: Successful login with valid...">
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\cub-demo\src\steps\belivi" />
+      <recent name="D:\cub-demo\src\pages" />
+      <recent name="D:\cub-demo\src\pages\belivi" />
+      <recent name="D:\cub-demo\tests\examples" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Cucumber.js.Scenario: Verify suspended apartment ...">
     <configuration name="Scenario: Create a new land property ..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
       <option name="myFilePath" value="$PROJECT_DIR$/tests/create.feature" />
       <option name="myNameFilter" value="^Create a new land property listing$" />
@@ -128,18 +157,6 @@
       </method>
     </configuration>
     <configuration name="Scenario: Create a new property listi... (1)" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
-      <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
-      <option name="myNameFilter" value="^Create a new property listing by not sufficient balance$" />
-      <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <envs>
-        <env name="HEADLESS" value="false" />
-      </envs>
-      <method v="2">
-        <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: Create a new property listi..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
       <option name="myFilePath" value="$PROJECT_DIR$/tests/property-posting.feature" />
       <option name="myNameFilter" value="^Create a new property listing by not sufficient balance$" />
       <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
@@ -184,6 +201,18 @@
         <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
       </method>
     </configuration>
+    <configuration name="Scenario: Verify suspended apartment ..." type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true" temporary="true">
+      <option name="myFilePath" value="$PROJECT_DIR$/tests/lmp.feature" />
+      <option name="myNameFilter" value="^Verify suspended apartment listing appears on LMP$" />
+      <option name="cucumberJsArguments" value="--require-module ts-node/register --require src/steps/**/*.ts --require src/support/**/*.ts tests/**/*.feature" />
+      <option name="workingDirectory" value="$PROJECT_DIR$" />
+      <envs>
+        <env name="HEADLESS" value="false" />
+      </envs>
+      <method v="2">
+        <option name="TypeScript.Before.Run" enabled="true" FAIL_ON_ERROR="true" CONFIG_PATH="$PROJECT_DIR$/tsconfig.json" />
+      </method>
+    </configuration>
     <configuration default="true" type="cucumber.js" factoryName="Cucumber.js" focusToolWindowBeforeRun="true">
       <option name="myFilePath" value="" />
       <option name="myNameFilter" value="" />
@@ -198,16 +227,16 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber.js.Scenario: Verify suspended apartment ..." />
         <item itemvalue="Cucumber.js.Scenario: Successful login with valid..." />
         <item itemvalue="Cucumber.js.Scenario: Create a new property listing (2)" />
         <item itemvalue="Cucumber.js.Scenario: Create a new land property ..." />
         <item itemvalue="Cucumber.js.Scenario: Create a new property listi... (1)" />
-        <item itemvalue="Cucumber.js.Scenario: Create a new property listi..." />
       </list>
     </recent_temporary>
   </component>
   <component name="SeleniumInternalSettingsState">
-    <option name="lastUrl" value="https://staging.propertyguru.vn/nguoi-ban/trang-chu" />
+    <option name="lastUrl" value="https://staging.propertyguru.vn/sellernet/trang-dang-nhap?redirect=true&amp;returnurl=%2Fnguoi-ban%2Ftrang-chu%3F" />
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -236,7 +265,9 @@
       <workItem from="1761290107050" duration="4918000" />
       <workItem from="1762247295562" duration="741000" />
       <workItem from="1762248138701" duration="121000" />
-      <workItem from="1762309922817" duration="17436000" />
+      <workItem from="1762309922817" duration="17723000" />
+      <workItem from="1762483189730" duration="2156000" />
+      <workItem from="1762496469637" duration="3097000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Add project configuration files and enhance step definitions with cleanup logic">
       <option name="closed" value="true" />
@@ -270,7 +301,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762332812201</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="refactor: Rename property-posting.feature to create.feature and update user tags in scenarios">
+      <option name="closed" value="true" />
+      <created>1762336986964</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762336986964</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactor: Rename property-posting.feature to create.feature and update user tags in scenarios">
+      <option name="closed" value="true" />
+      <created>1762337051952</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1762337051952</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

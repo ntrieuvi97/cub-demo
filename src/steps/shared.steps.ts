@@ -1,65 +1,20 @@
-import {After, defineStep} from '@cucumber/cucumber';
+import {After, Given, When} from '@cucumber/cucumber';
 import {timeouts} from '../configs';
-import {WebUrls} from '../apis/urls';
 import {CustomWorld} from '../support/world';
-import {Page} from 'playwright-core';
+import {AmeApi} from '../apis/endpoints/ame.api';
+import {goToPage, scrollToBottom, validateCreatedListing, validatePageAndUserId} from '../utils/step-helpers';
 
-const scrollStep = 'I scroll to the bottom of the page';
-const navigationStep = 'I navigate to the {string}';
-const pauseStep = 'I pause for debuging';
-const waitStep = 'I wait for {int} seconds';
-
-async function getPageUrl(pageName: string): Promise<string> {
-    const urlMap: Record<string, string> = {
-        'LCP': WebUrls.listingCreationPage,
-        'LoginPage': WebUrls.loginPage,
-        'Home': WebUrls.baseUrl
-        // Add more page mappings as needed
-    };
-
-    const url = urlMap[pageName];
-    if (!url) {
-        throw new Error(`Page "${pageName}" not found in URL mappings`);
-    }
-    return url;
-}
-
-async function goToPage(page: Page, pageName: string) {
-    const pageUrl = await getPageUrl(pageName);
-    console.log(`Navigating to ${pageName} at URL: ${pageUrl}`);
-    console.log(`page instance: ${page}`);
-    await page.goto(pageUrl);
-    await page.waitForLoadState('domcontentloaded');
-}
-
-async function scrollToBottom(context: any) {
-    if (!context.page) throw new Error('page is not initialized on World context');
-    await context.page.evaluate(async () => {
-        await new Promise<void>(resolve => {
-            const scrollStep = 50;
-            const scrollInterval = 10;
-            const scroll = () => {
-                if (window.scrollY + window.innerHeight < document.body.scrollHeight) {
-                    window.scrollBy(0, scrollStep);
-                    setTimeout(scroll, scrollInterval);
-                } else {
-                    resolve();
-                }
-            };
-            scroll();
-        });
-    });
-}
-
-defineStep(scrollStep, { timeout: timeouts.pageInteraction }, async function (this: CustomWorld) {
+// Navigation steps
+When('I scroll to the bottom of the page', {timeout: timeouts.pageInteraction}, async function (this: CustomWorld) {
     await scrollToBottom(this);
 });
 
-defineStep(navigationStep, { timeout: timeouts.navigation }, async function (this: CustomWorld, pageName: string) {
+Given('I navigate to the {string}', {timeout: timeouts.navigation}, async function (this: CustomWorld, pageName: string) {
     await goToPage(this.page!, pageName);
 });
 
-defineStep(pauseStep, { timeout: timeouts.pageInteraction }, async function (this: CustomWorld) {
+// Utility steps
+Given('I pause for debuging', {timeout: timeouts.pageInteraction}, async function (this: CustomWorld) {
     console.log('Pausing execution for debugging. Press Enter to continue...');
     if (!this.page) {
         throw new Error('Page is not initialized');
@@ -67,11 +22,107 @@ defineStep(pauseStep, { timeout: timeouts.pageInteraction }, async function (thi
     await this.page.pause();
 });
 
-defineStep(waitStep, { timeout: timeouts.pageInteraction }, async function (this: CustomWorld, seconds: number) {
+Given('I wait for {int} seconds', {timeout: timeouts.pageInteraction}, async function (this: CustomWorld, seconds: number) {
     const milliseconds = seconds * 1000;
     console.log(`Waiting for ${seconds} seconds...`);
     await new Promise(resolve => setTimeout(resolve, milliseconds));
     console.log(`Waited for ${seconds} seconds`);
+});
+
+// AME API - Publish listing steps
+Given('I publish listing {int}', {timeout: timeouts.api}, async function (this: CustomWorld, listingId: number) {
+    console.log(`📢 Publishing listing ${listingId}...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.publishListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Publish listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} published successfully`);
+});
+
+Given('I publish the listing', {timeout: timeouts.api}, async function (this: CustomWorld) {
+    const listingId = validateCreatedListing(this);
+    console.log(`📢 Publishing created listing ${listingId}...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.publishListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Publish listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} published successfully`);
+});
+
+// AME API - Suspend listing steps
+Given('I suspend listing {int}', {timeout: timeouts.api}, async function (this: CustomWorld, listingId: number) {
+    console.log(`🚫 Suspending listing ${listingId}...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.suspendListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Suspend listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} suspended successfully`);
+});
+
+Given('I suspend the listing', {timeout: timeouts.api}, async function (this: CustomWorld) {
+    const listingId = validateCreatedListing(this);
+    console.log(`🚫 Suspending created listing ${listingId}...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.suspendListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Suspend listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} suspended successfully`);
+});
+
+// AME API - Mark review listing steps
+Given('I mark review listing {int}', {timeout: timeouts.api}, async function (this: CustomWorld, listingId: number) {
+    console.log(`🔍 Marking listing ${listingId} for review...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.markReviewListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Mark review listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} marked for review successfully`);
+});
+
+Given('I mark review the listing', {timeout: timeouts.api}, async function (this: CustomWorld) {
+    const listingId = validateCreatedListing(this);
+    console.log(`🔍 Marking created listing ${listingId} for review...`);
+    validatePageAndUserId(this);
+
+    const ameApi = new AmeApi(this.page!);
+    await ameApi.markReviewListing({
+        productId: listingId,
+        actorId: this.userId!,
+        ownerId: this.userId!,
+        note: '[Automation] Mark review listing by api'
+    });
+
+    console.log(`✅ Listing ${listingId} marked for review successfully`);
 });
 
 After(async function (this: CustomWorld) {
