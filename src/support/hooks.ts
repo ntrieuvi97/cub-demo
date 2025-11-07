@@ -1,10 +1,11 @@
 import {After, Before, Status} from '@cucumber/cucumber';
-import {chromium} from '@playwright/test';
+import {chromium, _android} from '@playwright/test';
 import {CustomWorld} from './world';
 import {UMSApi} from '../apis/endpoints/ums.api';
 import {DataLoader} from '../utils/data-loader';
 import {UsersData} from '../types';
 import playwrightConfig from '../../playwright.config';
+import {AndroidConfig} from '../configs/android.config';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -34,9 +35,9 @@ function loadAllCredentials(): UsersData {
     return merged;
 }
 
-// Hook for scenarios tagged with @web-ui - initialize browser
+// Hook for scenarios tagged with @web-ui - initialize desktop browser
 Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
-    console.log('🌐 @web-ui hook triggered - Initializing browser');
+    console.log('🌐 @web-ui hook triggered - Initializing desktop browser');
 
     if (!this.browser) {
         const headless = playwrightConfig.use?.headless ?? false;
@@ -44,7 +45,7 @@ Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
             headless,
             args: ['--start-maximized']
         });
-        console.log('✅ Browser instance created');
+        console.log('✅ Desktop browser instance created');
     }
 
     if (!this.context) {
@@ -71,7 +72,40 @@ Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
         console.log('✅ Page instance created');
     }
 
-    console.log(`✅ Browser initialized - Page is ${this.page ? 'defined' : 'undefined'}`);
+    console.log(`✅ Desktop browser initialized - Page is ${this.page ? 'defined' : 'undefined'}`);
+});
+
+// Hook for scenarios tagged with @android - initialize Android device
+Before({ tags: '@android' }, async function (this: CustomWorld) {
+    console.log('📱 @android hook triggered - Initializing Android device');
+
+    try {
+        // Connect to Android device
+        const [device] = await _android.devices();
+        if (!device) {
+            throw new Error('No Android device found. Please connect an Android device via ADB and run: adb devices');
+        }
+
+        console.log(`✅ Connected to Android device: ${device.model()}`);
+
+        // Launch browser on Android device
+        this.context = await device.launchBrowser({
+            pkg: AndroidConfig.browser.packageName,
+        });
+        console.log(`✅ Browser launched on Android device (${AndroidConfig.browser.packageName})`);
+
+        // Create page
+        this.page = await this.context.newPage();
+        console.log('✅ Page instance created on Android device');
+
+        // Store device reference for cleanup
+        (this as any).androidDevice = device;
+
+        console.log(`✅ Android device initialized - Page is ${this.page ? 'defined' : 'undefined'}`);
+    } catch (error) {
+        console.error('❌ Failed to initialize Android device:', error);
+        throw new Error(`Android initialization failed: ${error}. Make sure your device is connected and ADB is running.`);
+    }
 });
 
 // Hook for scenarios tagged with @user=xxx
@@ -132,8 +166,9 @@ After(async function (this: CustomWorld, { result, pickle }) {
         }
     }
 
-    // Stop tracing if enabled
-    if (this.context && playwrightConfig.use?.trace) {
+    // Stop tracing if enabled (only for desktop browser)
+    const isAndroid = (this as any).androidDevice !== undefined;
+    if (this.context && playwrightConfig.use?.trace && !isAndroid) {
         const traceConfig = playwrightConfig.use.trace;
         const shouldSaveTrace =
             traceConfig === 'on' ||
@@ -149,6 +184,14 @@ After(async function (this: CustomWorld, { result, pickle }) {
         }
     }
 
+    // Cleanup Android device
+    if ((this as any).androidDevice) {
+        console.log('📱 Closing Android device connection');
+        await (this as any).androidDevice.close();
+        console.log('✅ Android device closed');
+    }
+
+    // Cleanup desktop browser
     if (this.browser) {
         await this.browser.close();
         console.log('✅ Browser closed');
