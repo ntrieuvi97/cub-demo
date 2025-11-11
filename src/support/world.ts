@@ -1,5 +1,4 @@
 import { Browser, Page, BrowserContext, chromium } from '@playwright/test';
-import { HomePage } from '../pages/belivi/home.page';
 import { IWorldOptions, setWorldConstructor } from '@cucumber/cucumber';
 import { PageFactory } from '../pages/page.factory';
 

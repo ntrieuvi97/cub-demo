@@ -1,5 +1,4 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
 import assert from 'assert';
 import { baseUrl, timeouts } from '../../configs';
 import { CustomWorld } from '../../support/world';

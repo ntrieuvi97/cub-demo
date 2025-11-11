@@ -5,13 +5,14 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "cucumber-js",
-    "test:web": "cucumber-js --tags \"@web-ui\"",
+    "test:web": "cucumber-js --tags \"@web-ui\" --parallel 4",
     "test:android": "cucumber-js --tags \"@android\"",
     "test:debug": "cucumber-js --tags \"@debug\"",
     "test:lmp": "cucumber-js --tags \"@lmp\"",
     "test:login": "cucumber-js --tags \"@login\"",
     "test:lcp": "cucumber-js --tags \"@lcp\"",
-    "test:regression": "cucumber-js --tags \"@regression\""
+    "test:regression": "cucumber-js --tags \"@regression\"",
+    "test:boost": "cucumber-js --tags \"@boost\""
   },
   "author": "",
   "license": "MIT",

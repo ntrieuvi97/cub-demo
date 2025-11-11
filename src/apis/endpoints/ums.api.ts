@@ -10,28 +10,24 @@ export class UMSApi {
     }
 
     async login(userName: string, password: string, rememberMe: boolean = false): Promise<APIResponse> {
+        const url = `${WebUrls.baseUrl}${UMSEndpoint.signIn}`;
 
+        // Use model to create request payload
+        const loginPayload = createLoginRequest(userName, password, rememberMe);
 
-        try {
-            const url = `${WebUrls.baseUrl}${UMSEndpoint.signIn}`;
-            
-            // Use model to create request payload
-            const loginPayload = createLoginRequest(userName, password, rememberMe);
+        const response = await this.page.request.post(url, {
+            data: loginPayload,
+            headers: HeaderPresets.ums()
+        });
 
-            const response = await this.page.request.post(url, {
-                data: loginPayload,
-                headers: HeaderPresets.ums()
-            });
-            console.log(`Login response status: ${response.status()}`);
-            console.log(`Login response body: ${await response.text()}`);
-            if (!response.ok()) {
-                throw new Error(`Login failed with status: ${response.status()}`);
-            }
+        console.log(`Login response status: ${response.status()}`);
+        console.log(`Login response body: ${await response.text()}`);
 
-            return response;
-        } catch (error) {
-            throw new Error(`API login failed: ${error}`);
+        if (!response.ok()) {
+            throw new Error(`Login failed with status: ${response.status()}`);
         }
+
+        return response;
     }
 
     /**
@@ -39,24 +35,20 @@ export class UMSApi {
      * @returns API Response with contact details
      */
     async fetchContact(): Promise<APIResponse> {
-        try {
-            const url = `${WebUrls.sellernetApiBaseUrl}${UMSEndpoint.fetchContact}`;
+        const url = `${WebUrls.sellernetApiBaseUrl}${UMSEndpoint.fetchContact}`;
 
-            const response = await this.page.request.get(url, {
-                headers: HeaderPresets.sellernet()
-            });
+        const response = await this.page.request.get(url, {
+            headers: HeaderPresets.sellernet()
+        });
 
-            console.log(`Fetch Contact response status: ${response.status()}`);
-            const responseBody = await response.text();
-            console.log(`Fetch Contact response body: ${responseBody}`);
+        console.log(`Fetch Contact response status: ${response.status()}`);
+        const responseBody = await response.text();
+        console.log(`Fetch Contact response body: ${responseBody}`);
 
-            if (!response.ok()) {
-                throw new Error(`Fetch contact failed with status: ${response.status()}, body: ${responseBody}`);
-            }
-
-            return response;
-        } catch (error) {
-            throw new Error(`API fetch contact failed: ${error}`);
+        if (!response.ok()) {
+            throw new Error(`Fetch contact failed with status: ${response.status()}, body: ${responseBody}`);
         }
+
+        return response;
     }
 }

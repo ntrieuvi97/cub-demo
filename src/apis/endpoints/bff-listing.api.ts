@@ -43,29 +43,25 @@ export class BffListingApi {
         balconyDirection?: number;
         unitPrice?: number;
     }): Promise<APIResponse> {
-        try {
-            const url = `${WebUrls.bffApiBaseUrl}${BffListingEndpoint.createListing}`;
-            
-            // Use model to create request payload with defaults
-            const payload = createListingRequest(listingData);
+        const url = `${WebUrls.bffApiBaseUrl}${BffListingEndpoint.createListing}`;
 
-            const response = await this.page.request.post(url, {
-                data: payload,
-                headers: HeaderPresets.bffListing()
-            });
+        // Use model to create request payload with defaults
+        const payload = createListingRequest(listingData);
 
-            console.log(`Create Listing response status: ${response.status()}`);
-            const responseBody = await response.text();
-            console.log(`Create Listing response body: ${responseBody}`);
+        const response = await this.page.request.post(url, {
+            data: payload,
+            headers: HeaderPresets.bffListing()
+        });
 
-            if (!response.ok()) {
-                throw new Error(`Create listing failed with status: ${response.status()}, body: ${responseBody}`);
-            }
+        console.log(`Create Listing response status: ${response.status()}`);
+        const responseBody = await response.text();
+        console.log(`Create Listing response body: ${responseBody}`);
 
-            return response;
-        } catch (error) {
-            throw new Error(`API create listing failed: ${error}`);
+        if (!response.ok()) {
+            throw new Error(`Create listing failed with status: ${response.status()}, body: ${responseBody}`);
         }
+
+        return response;
     }
 
     /**
@@ -74,24 +70,20 @@ export class BffListingApi {
      * @returns API Response
      */
     async createListingRaw(payload: CreateListingRequest): Promise<APIResponse> {
-        try {
-            const url = `${WebUrls.bffApiBaseUrl}${BffListingEndpoint.createListing}`;
+        const url = `${WebUrls.bffApiBaseUrl}${BffListingEndpoint.createListing}`;
 
-            const response = await this.page.request.post(url, {
-                data: payload,
-                headers: HeaderPresets.bffListing()
-            });
+        const response = await this.page.request.post(url, {
+            data: payload,
+            headers: HeaderPresets.bffListing()
+        });
 
-            console.log(`Create Listing (Raw) response status: ${response.status()}`);
-            
-            if (!response.ok()) {
-                const responseBody = await response.text();
-                throw new Error(`Create listing failed with status: ${response.status()}, body: ${responseBody}`);
-            }
+        console.log(`Create Listing (Raw) response status: ${response.status()}`);
 
-            return response;
-        } catch (error) {
-            throw new Error(`API create listing (raw) failed: ${error}`);
+        if (!response.ok()) {
+            const responseBody = await response.text();
+            throw new Error(`Create listing failed with status: ${response.status()}, body: ${responseBody}`);
         }
+
+        return response;
     }
 }
