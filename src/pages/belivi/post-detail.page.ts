@@ -1,9 +1,10 @@
-import { BasePage } from '../base.page';
+import {BasePage} from '../base.page';
+import {Page} from '@playwright/test';
 
 export class PostDetailPage extends BasePage {
   static TITLE_SELECTOR = 'h1, h2, .entry-title, .wp-block-post-title';
 
-  constructor(page: import('@playwright/test').Page) {
+    constructor(page: Page) {
     super(page);
   }
 

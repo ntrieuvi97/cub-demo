@@ -1,9 +1,10 @@
-import { BasePage } from '../base.page';
+import {BasePage} from '../base.page';
+import {Page} from '@playwright/test';
 
 export class HomePage extends BasePage {
   static POST_LINK_SELECTOR = 'ul.wp-block-post-template li.wp-block-post h2.wp-block-post-title a';
 
-  constructor(page: import('@playwright/test').Page) {
+    constructor(page: Page) {
     super(page);
   }
 
