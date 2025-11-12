@@ -1,5 +1,6 @@
 import {BasePage} from '../base.page';
 import {Page} from '@playwright/test';
+import {baseUrl} from "../../configs";
 
 export class HomePage extends BasePage {
   static POST_LINK_SELECTOR = 'ul.wp-block-post-template li.wp-block-post h2.wp-block-post-title a';
@@ -8,8 +9,8 @@ export class HomePage extends BasePage {
     super(page);
   }
 
-  async open(url: string) {
-    await this.page.goto(url);
+    async open() {
+        await this.page.goto(baseUrl);
   }
 
   async getDisplayedPosts() {
