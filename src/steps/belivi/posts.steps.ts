@@ -9,7 +9,7 @@ let postUrl: string;
 
 Given('I navigate to the homepage', { timeout: timeouts.navigation }, async function (this: CustomWorld) {
   const homePage = this.pages.home();
-  await homePage.open(baseUrl);
+  await homePage.open();
 });
 
 Then('I should see {int} displayed posts', { timeout: timeouts.elementLoad }, async function (this: CustomWorld, expectedCount: number) {

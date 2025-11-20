@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
-import { HomePage } from './belivi/home.page';
-import { ListingCreationPage } from './listing-creation.page';
-import { PostDetailPage } from './belivi/post-detail.page';
-import { ListingManagementPage } from './listing-management.page';
-import {LoginPage} from "./login.page";
+import { HomePage } from '../pages/belivi/home.page';
+import { ListingCreationPage } from '../pages/listing-creation.page';
+import { PostDetailPage } from '../pages/belivi/post-detail.page';
+import { ListingManagementPage } from '../pages/listing-management.page';
+import {LoginPage} from "../pages/login.page";
 
 /**
  * Page Object Factory - centralized management of page objects

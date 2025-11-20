@@ -3,7 +3,7 @@ import {defineConfig} from '@playwright/test';
 export default defineConfig({
     timeout: 30000,
     use: {
-        headless: false,
+        headless: process.env.HEADLESS !== 'false', // Default to headless unless explicitly set to 'false'
         viewport: null, // null allows browser to use maximized window size
         actionTimeout: 10000,
         ignoreHTTPSErrors: true,

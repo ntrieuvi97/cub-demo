@@ -1,17 +1,17 @@
 import {After, Before, Status} from '@cucumber/cucumber';
-import {chromium, _android} from '@playwright/test';
+import {_android} from '@playwright/test';
 import {CustomWorld} from './world';
 import {UMSApi} from '../apis/endpoints/ums.api';
 import {DataLoader} from '../utils/data-loader';
 import {UsersData} from '../types';
 import playwrightConfig from '../../playwright.config';
 import {AndroidConfig} from '../configs/android.config';
+import {BrowserFactory, BrowserName} from '../core/browser.factory';
+import {ContextFactory, DeviceType} from '../core/context.factory';
 import * as fs from 'fs';
 import * as path from 'path';
 
-console.log('✅ hooks.ts file loaded');
 
-// Utility to scan tests/data for all credential files
 function getAllCredentialFiles(): string[] {
     const dir = path.resolve('tests/data');
     if (!fs.existsSync(dir)) return [];
@@ -20,7 +20,6 @@ function getAllCredentialFiles(): string[] {
         .map(f => path.join('tests/data', f));
 }
 
-// Utility to load and merge all credentials from all files
 function loadAllCredentials(): UsersData {
     const files = getAllCredentialFiles();
     let merged: UsersData = {};
@@ -36,39 +35,51 @@ function loadAllCredentials(): UsersData {
 }
 
 // Hook for scenarios tagged with @web-ui - initialize desktop browser
-Before({ tags: '@web-ui' }, async function (this: CustomWorld) {
+Before({ tags: '@web-ui' }, async function (this: CustomWorld, scenario) {
     console.log('🌐 @web-ui hook triggered - Initializing desktop browser');
 
-    if (!this.browser) {
-        const headless = playwrightConfig.use?.headless ?? false;
-        this.browser = await chromium.launch({
-            headless,
-            args: ['--start-maximized']
-        });
-        console.log('✅ Desktop browser instance created');
-    }
-
-    if (!this.context) {
-        // Use Playwright config settings for context
-        this.context = await this.browser.newContext({
-            viewport: null, // null viewport allows browser to use full screen
-            ignoreHTTPSErrors: playwrightConfig.use?.ignoreHTTPSErrors,
-            // Enable screenshots and video based on config
-            recordVideo: playwrightConfig.use?.video ? {
-                dir: 'test-results/videos'
-            } : undefined,
-        });
-        console.log('✅ Browser context created');
-
-        // Start tracing if enabled in config
-        if (playwrightConfig.use?.trace) {
-            await this.context.tracing.start({ screenshots: true, snapshots: true });
-            console.log('✅ Tracing started');
+    // Determine browser type from tag or environment
+    let browserName: BrowserName = BrowserFactory.getBrowserFromEnv();
+    const browserTag = scenario.pickle.tags.find(tag => tag.name.startsWith('@browser='));
+    if (browserTag) {
+        const match = browserTag.name.match(/@browser=(.+)/);
+        if (match && (match[1] === 'chromium' || match[1] === 'firefox' || match[1] === 'webkit')) {
+            browserName = match[1] as BrowserName;
         }
     }
 
+    // Determine device type from tag
+    let deviceType: DeviceType = 'desktop';
+    const deviceTag = scenario.pickle.tags.find(tag => tag.name.startsWith('@device='));
+    if (deviceTag) {
+        const match = deviceTag.name.match(/@device=(.+)/);
+        if (match && (match[1] === 'desktop' || match[1] === 'mobile' || match[1] === 'tablet')) {
+            deviceType = match[1] as DeviceType;
+        }
+    }
+
+    console.log(`🔧 Browser: ${browserName}, Device: ${deviceType}`);
+
+    if (!this.browser) {
+        const headless = playwrightConfig.use?.headless;
+        this.browser = await BrowserFactory.launch(browserName, { headless }, false);
+        console.log(`✅ ${browserName} browser instance created`);
+    }
+
+    if (!this.context) {
+        if (!this.browser) {
+            throw new Error('Browser instance not initialized');
+        }
+        this.context = await ContextFactory.createForDevice(
+            this.browser,
+            deviceType,
+            { name: `${browserName}-${deviceType}-${Date.now()}` }
+        );
+        console.log(`✅ Browser context created for ${deviceType}`);
+    }
+
     if (!this.page) {
-        this.page = await this.context.newPage();
+        this.page = await ContextFactory.createPage(this.context);
         console.log('✅ Page instance created');
     }
 
@@ -177,10 +188,9 @@ After(async function (this: CustomWorld, { result, pickle }) {
         if (shouldSaveTrace) {
             console.log('🛑 Stopping tracing');
             const tracePath = `test-results/tracing/${testName}-${timestamp}.zip`;
-            await this.context.tracing.stop({ path: tracePath });
-            console.log(`📊 Trace saved: ${tracePath}`);
+            await ContextFactory.stopTracing(this.context, tracePath);
         } else {
-            await this.context.tracing.stop();
+            await ContextFactory.stopTracing(this.context);
         }
     }
 
@@ -193,7 +203,6 @@ After(async function (this: CustomWorld, { result, pickle }) {
 
     // Cleanup desktop browser
     if (this.browser) {
-        await this.browser.close();
-        console.log('✅ Browser closed');
+        await BrowserFactory.close(this.browser);
     }
 });

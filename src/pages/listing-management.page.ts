@@ -1,5 +1,5 @@
 import {Page} from '@playwright/test';
-import {BasePage} from './base.page';
+import {BasePage} from '../core/base.page';
 import {WebUrls} from '../apis/urls';
 
 /**

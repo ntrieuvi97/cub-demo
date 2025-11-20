@@ -1,6 +1,8 @@
-import { Browser, Page, BrowserContext, chromium } from '@playwright/test';
+import { Browser, Page, BrowserContext } from '@playwright/test';
 import { IWorldOptions, setWorldConstructor } from '@cucumber/cucumber';
-import { PageFactory } from '../pages/page.factory';
+import { PageFactory } from '../core/page.factory';
+import { BrowserFactory, BrowserName } from '../core/browser.factory';
+import { ContextFactory, DeviceType } from '../core/context.factory';
 
 export class CustomWorld {
   browser?: Browser;
@@ -9,10 +11,11 @@ export class CustomWorld {
   private _pageFactory?: PageFactory;
   createdListingId?: number;  // Store created listing ID
   userId?: number;            // Store user ID
+  browserName?: BrowserName;  // Store browser type being used
+  deviceType?: DeviceType;    // Store device type being tested
 
   constructor(options: IWorldOptions) {
     // Optionally initialize values here
-
   }
 
   /**
@@ -28,20 +31,48 @@ export class CustomWorld {
     return this._pageFactory;
   }
 
-  async initBrowser() {
-    this.browser = await chromium.launch();
-    this.context = await this.browser.newContext();
-    this.page = await this.context.newPage();
+  /**
+   * Initialize browser with specified type and device
+   * @param browserName - Browser type (chromium, firefox, webkit)
+   * @param deviceType - Device type (desktop, mobile, tablet)
+   * @param reuseBrowser - Reuse existing browser instance if available
+   */
+  async initBrowser(
+    browserName: BrowserName = 'chromium',
+    deviceType: DeviceType = 'desktop',
+    reuseBrowser: boolean = false
+  ): Promise<Page> {
+    this.browserName = browserName;
+    this.deviceType = deviceType;
+
+    // Launch browser using factory
+    this.browser = await BrowserFactory.launch(browserName, undefined, reuseBrowser);
+
+    // Create context using factory
+    this.context = await ContextFactory.createForDevice(
+      this.browser,
+      deviceType,
+      { name: `${browserName}-${deviceType}-${Date.now()}` }
+    );
+
+    // Create page
+    this.page = await ContextFactory.createPage(this.context);
+
+    console.log(`✅ Initialized ${browserName} browser with ${deviceType} context`);
     return this.page;
-  };
+  }
 
-  async closeBrowser() {
-    if (this.browser) {
-      await this.browser.close();
+  /**
+   * Close browser and context
+   */
+  async closeBrowser(): Promise<void> {
+    if (this.context) {
+      await ContextFactory.close(this.context);
     }
-  };
-
-
+    if (this.browser) {
+      await BrowserFactory.close(this.browser);
+    }
+  }
 }
 
 setWorldConstructor(CustomWorld);
