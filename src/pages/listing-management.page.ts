@@ -132,7 +132,7 @@ export class ListingManagementPage extends BasePage {
         console.log('💳 Step 1: Clicking "Tiếp tục" button...');
         try {
             const button = this.page.getByRole('button', {name: /Tiếp tục/i});
-            const isVisible = await button.isVisible({timeout: 3000}).catch(() => false);
+            const isVisible = await button.isVisible({timeout: 10000}).catch(() => false);
 
             if (isVisible) {
                 console.log(`  Found "Tiếp tục" button by role`);
@@ -156,7 +156,7 @@ export class ListingManagementPage extends BasePage {
         // Fallback: Try by role and name
         try {
             const button = this.page.getByRole('button', {name: /Thanh toán/i});
-            const isVisible = await button.isVisible({timeout: 3000}).catch(() => false);
+            const isVisible = await button.isVisible({timeout: 10000}).catch(() => false);
 
             if (isVisible) {
                 console.log(`  Found "Thanh toán" button by role`);
@@ -167,8 +167,9 @@ export class ListingManagementPage extends BasePage {
             }
         } catch (e) {
             console.log(` failed: ${e}`);
+            throw new Error('Could not find "Thanh toán" button');
         }
-        throw new Error('Could not find "Thanh toán" button');
+
     }
 
     /**

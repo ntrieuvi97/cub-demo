@@ -1,10 +1,10 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import {Given, Then, When} from '@cucumber/cucumber';
 import assert from 'assert';
-import { CustomWorld } from '../support/world';
-import { UMSApi } from '../apis/endpoints/ums.api';
-import { BffListingApi } from '../apis/endpoints/bff-listing.api';
-import { CommonApi } from '../apis/endpoints/common.api';
-import { getPropertyType, getCategoryCode, getVipType } from '../types';
+import {CustomWorld} from '../support/world';
+import {UMSApi} from '../apis/endpoints/ums.api';
+import {BffListingApi} from '../apis/endpoints/bff-listing.api';
+import {CommonApi} from '../apis/endpoints/common.api';
+import {getCategoryCode, getPropertyType, getVipType} from '../types';
 
 // Shared state for the scenario
 let createdListingId: string;
