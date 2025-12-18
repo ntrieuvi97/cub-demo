@@ -5,9 +5,9 @@ import { BrowserFactory, BrowserName } from '../core/browser.factory';
 import { ContextFactory, DeviceType } from '../core/context.factory';
 
 export class CustomWorld {
-  browser?: Browser;
-  page?: Page;
-  context?: BrowserContext;
+  public browser: Browser | undefined;
+  public page?: Page;
+  public context?: BrowserContext;
   private _pageFactory?: PageFactory;
   createdListingId?: number;  // Store created listing ID
   userId?: number;            // Store user ID

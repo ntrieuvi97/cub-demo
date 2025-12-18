@@ -81,7 +81,7 @@ Given('I have a listing that {string} a {string} with {string} type', async func
 
     const listingData = {
         title: `[Auto Test] ${propertyType} ${category} ${Date.now()}`,
-        description: 'This is an automated test listing created via Cucumber BDD framework',
+        descContent: 'This is an automated test listing created via Cucumber BDD framework',
         productType: propertyTypeCode,
         categoryId: categoryCode,
         price: 5000000000, // 5 billion VND

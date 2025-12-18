@@ -14,6 +14,7 @@ let contactData: any;
 
 
 Given('I launch the login page', { timeout: timeouts.navigation }, async function (this: CustomWorld) {
+
     await this.page?.goto(`https://staging.propertyguru.vn/sellernet/trang-dang-nhap`);
     loginPage = this.pages.loginPage()
 });

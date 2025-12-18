@@ -1,6 +1,12 @@
 import {APIResponse, Page} from '@playwright/test';
 import {AMEEndpoint, WebUrls} from '../urls';
-import {generateRequestId, HeaderPresets} from '../common-headers';
+import {HeaderPresets} from '../common-headers';
+import {
+    PayloadFactory,
+    PublishListingRequest,
+    SuspendListingRequest,
+    MarkReviewListingRequest
+} from '../models';
 
 /**
  * AME API (Listing Orchestrator)
@@ -13,25 +19,13 @@ export class AmeApi {
 
     /**
      * Publish a listing via AME API
-     * @param params - Publish listing parameters
+     * @param params - Publish listing parameters (defaults will be applied)
      * @returns API Response
      */
-    async publishListing(params: {
-        productId: number;
-        actorId: number;
-        ownerId: number;
-        note?: string;
-        correlationId?: string;
-    }): Promise<APIResponse> {
+    async publishListing(params: Partial<PublishListingRequest>): Promise<APIResponse> {
         const url = `${WebUrls.internalApiBaseUrl}${AMEEndpoint.publish}`;
 
-        const payload = {
-            productId: params.productId,
-            actorId: params.actorId,
-            correlationId: params.correlationId || generateRequestId(),
-            note: params.note || '[Automation] Published listing by Automation Tester',
-            ownerId: params.ownerId,
-        };
+        const payload = PayloadFactory.createPublishListing(params);
 
         const response = await this.page.request.put(url, {
             data: payload,
@@ -52,39 +46,13 @@ export class AmeApi {
 
     /**
      * Suspend a listing via AME API
-     * @param params - Suspend listing parameters
+     * @param params - Suspend listing parameters (defaults will be applied)
      * @returns API Response
      */
-    async suspendListing(params: {
-        productId: number;
-        actorId: number;
-        ownerId: number;
-        note?: string;
-        correlationId?: string;
-        explanations?: Array<{
-            description: string;
-            reason: string;
-            reasonCode: string;
-            title: string;
-        }>;
-    }): Promise<APIResponse> {
+    async suspendListing(params: Partial<SuspendListingRequest>): Promise<APIResponse> {
         const url = `${WebUrls.internalApiBaseUrl}${AMEEndpoint.suspend}`;
 
-        const payload = {
-            productId: params.productId,
-            actorId: params.actorId,
-            correlationId: params.correlationId || generateRequestId(),
-            note: params.note || '[Automation] Suspend listing',
-            ownerId: params.ownerId,
-            explanations: params.explanations || [
-                {
-                    description: '[Automation] Set up listing state',
-                    reason: 'Category',
-                    reasonCode: '0',
-                    title: '[Automation] Set up listing state'
-                }
-            ]
-        };
+        const payload = PayloadFactory.createSuspendListing(params);
 
         const response = await this.page.request.put(url, {
             data: payload,
@@ -105,25 +73,13 @@ export class AmeApi {
 
     /**
      * Mark a listing for review via AME API
-     * @param params - Mark review listing parameters
+     * @param params - Mark review listing parameters (defaults will be applied)
      * @returns API Response
      */
-    async markReviewListing(params: {
-        productId: number;
-        actorId: number;
-        ownerId: number;
-        note?: string;
-        correlationId?: string;
-    }): Promise<APIResponse> {
+    async markReviewListing(params: Partial<MarkReviewListingRequest>): Promise<APIResponse> {
         const url = `${WebUrls.internalApiBaseUrl}${AMEEndpoint.markReview}`;
 
-        const payload = {
-            productId: params.productId,
-            actorId: params.actorId,
-            correlationId: params.correlationId || generateRequestId(),
-            note: params.note || '[Automation] Mark review listing',
-            ownerId: params.ownerId,
-        };
+        const payload = PayloadFactory.createMarkReviewListing(params);
 
         const response = await this.page.request.put(url, {
             data: payload,
@@ -142,4 +98,3 @@ export class AmeApi {
         return response;
     }
 }
-

@@ -94,6 +94,7 @@ When('I create a property listing with the following details:', async function (
         await propertyPostingPage.clickOnButtonByText('Không, tiếp tục');
     }
     await propertyPostingPage.clickOnButtonByText('Thanh toán');
+
 });
 
 When('I select {string} as listing type', async function (this: CustomWorld, listingType: string) {

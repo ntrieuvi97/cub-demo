@@ -1,7 +1,7 @@
-import { APIResponse, Page } from '@playwright/test';
-import { BffListingEndpoint, WebUrls } from '../urls';
-import { createListingRequest, CreateListingRequest } from '../models/create-listing.request';
-import { HeaderPresets } from '../common-headers';
+import {APIResponse, Page} from '@playwright/test';
+import {BffListingEndpoint, WebUrls} from '../urls';
+import {CreateListingRequest, PayloadFactory} from '../models';
+import {HeaderPresets} from '../common-headers';
 
 /**
  * BFF Listing API
@@ -17,36 +17,11 @@ export class BffListingApi {
      * @param listingData - Listing creation parameters
      * @returns API Response
      */
-    async createListing(listingData: {
-        title: string;
-        description: string;
-        productType: number;
-        categoryId: number;
-        price: number;
-        cityCode: string;
-        districtId: number;
-        wardId: number;
-        address: string;
-        contactMobile: string;
-        contactName: string;
-        contactEmail: string;
-        acreage: number;
-        fileIds: string;
-        viptype?: string;
-        streetId?: number;
-        projectId?: number;
-        bedroomCount?: number;
-        toiletCount?: number;
-        floorCount?: number;
-        facadeWidth?: number;
-        houseDirection?: number;
-        balconyDirection?: number;
-        unitPrice?: number;
-    }): Promise<APIResponse> {
+    async createListing(listingData: Parameters<typeof PayloadFactory.createListing>[0]): Promise<APIResponse> {
         const url = `${WebUrls.bffApiBaseUrl}${BffListingEndpoint.createListing}`;
 
-        // Use model to create request payload with defaults
-        const payload = createListingRequest(listingData);
+        // Use PayloadFactory to create request payload with defaults
+        const payload = PayloadFactory.createListing(listingData);
 
         const response = await this.page.request.post(url, {
             data: payload,

@@ -1,6 +1,6 @@
 import { APIResponse, Page } from '@playwright/test';
 import { UMSEndpoint, WebUrls } from '../urls';
-import { createLoginRequest } from '../models/login.request';
+import { PayloadFactory } from '../models';
 import { HeaderPresets } from '../common-headers';
 
 
@@ -12,8 +12,8 @@ export class UMSApi {
     async login(userName: string, password: string, rememberMe: boolean = false): Promise<APIResponse> {
         const url = `${WebUrls.baseUrl}${UMSEndpoint.signIn}`;
 
-        // Use model to create request payload
-        const loginPayload = createLoginRequest(userName, password, rememberMe);
+        // Use PayloadFactory to create request payload
+        const loginPayload = PayloadFactory.createLogin(userName, password, rememberMe);
 
         const response = await this.page.request.post(url, {
             data: loginPayload,
